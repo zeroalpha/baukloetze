@@ -1,0 +1,35 @@
+<table>
+	<tr>
+		<td>
+			<h1>Bauklötze</h1>
+		</td>
+		<td>
+			<font color="red" size="-1">by Christian Moniatis</font>
+		</td>
+	</tr>
+	<tr>
+		<%if session[:login]=="jap" then%>
+		<td>
+			<%=link_to Author.find(session[:au_id]).name, "/logout"%>
+		</td>
+		<td>
+			<%=link_to "Neuer Beitrag","entries/add"%>
+		</td>
+		<td>
+			<%=link_to "Beiträge löschen","entries/rem"%>
+		</td>
+		<td>
+			<%=link_to "Beiträge editieren","entries/edit"%>
+		</td>
+		<td>
+			<%=link_to "Neuer Benutzer","/authors/add"%>
+		</td>
+		<%else%>
+		<td>
+			<%=link_to "Login","/login"%>
+		</td>
+		<%end%>			
+
+	</tr>
+</table>
+ 

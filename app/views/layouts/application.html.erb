@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%="MyBlog" + @title%></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "style", :media => "all" %>
+  <%= stylesheet_link_tag    "my_style",:media => "all"%>
+  <%= javascript_include_tag "application" %>
+  <%= tinymce_assets %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div id="main" class="g1">
+		<%= render "layouts/header"%>
+
+
+		<%= yield %>
+
+
+		<%= render "layouts/footer"%>
+	</div>
+
+</body>
+</html>

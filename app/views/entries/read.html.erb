@@ -1,0 +1,8 @@
+
+<% if not @entries.empty? then %>
+<%   @entries.each do |entry|%>
+	<%=render :partial => "entry", :locals => {:entry => entry}%>
+<%   end%>
+<% else %>
+	<%=render :partial => "entry", :locals => {:entry => @entry}%>
+<% end %>

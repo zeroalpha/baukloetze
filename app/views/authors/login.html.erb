@@ -1,0 +1,15 @@
+<h3>Anmelden</h3>
+<br />
+<table>
+<%=form_tag :action => "login",:method => "post" do |f|%>
+	<tr><td><%=label_tag "Name :"%></td></tr>
+	<tr><td><%=text_field :login,:name%></td></tr>
+	<tr><td><%=label_tag "Passwort :"%></td></tr>
+	<tr><td><%=password_field :login,:password%></td></tr>	
+	<tr><td><%=submit_tag :Login%></td></tr>
+<%end%>
+</table>
+
+<%=@h_pw%><br />
+<%=@h_pw_orig%><br />
+<%=@salt%><br />

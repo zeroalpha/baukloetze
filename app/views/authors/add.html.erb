@@ -1,0 +1,12 @@
+<p><font color="red"><%=@errors%></font></p>
+<table>
+<%=form_tag do%>
+	<tr><td><%=label_tag "Name : "%></td>
+	<td><%=text_field :author,:name%></td></tr>
+	<tr><td><%=label_tag "Passwort : "%></td>
+	<td><%=password_field :author,:password%></td></tr>
+	<tr><td><%=label_tag "Passwort wiederholen : "%></td>
+	<td><%=password_field :author,:password_confirmation%></td></tr>
+	<tr><td><%=submit_tag "Anlegen"%><%=submit_tag "Abbrechen"%></td></tr>
+<%end%>
+</table>

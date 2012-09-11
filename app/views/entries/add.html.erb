@@ -1,0 +1,13 @@
+<h1>Beitrag Erstellen</h1>
+
+<table>
+<%=form_for @entry, {:url => "add"} do |f|%>
+	<tr><td><%=f.label :titel%></td></tr>
+	<tr><td><%=f.text_field :title%></td></tr>
+	<tr><td><%=f.label :content%></td></tr>
+	<tr><td><%=f.text_area :content, :class => "tinymce"%></td></tr>
+			<%=tinymce%>
+	<tr><td><%=f.submit%></td></tr>
+<%end%>	
+</table>
+

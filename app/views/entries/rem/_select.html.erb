@@ -1,0 +1,6 @@
+<%# encoding: utf-8%>
+<br />
+<%=form_tag(:action=>'rem',:method => "post") do |f|%>
+<%= collection_select(:entry,:id,@e_sel,:id,:title,{:prompt => false})%>
+<%= submit_tag "Wählen"%>
+<%end%>
