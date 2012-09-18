@@ -8,11 +8,9 @@ class AuthorsController < ApplicationController
       @author = Author.find_by_name params[:login][:name].downcase
       
       if @author then
-        pw = params[:login][:password]
-        @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(pw)+"äöüß"+@author.salt)
+        @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(params[:login][:password])+"äöüß"+@author.salt)
         @h_pw_orig = @author.password
         @salt = @author.salt
-        @pw_clear = params[:login][:password]
         if @h_pw == @author.password then
           session[:login] = "jap"
           session[:au_id] = @author.id
@@ -48,7 +46,7 @@ class AuthorsController < ApplicationController
          
           salt = Digest::SHA2.hexdigest(Time.now.to_s)
           pw = Digest::SHA2.hexdigest(params[:author][:password])
-          h_pw = Digest::SHA2.hexdigest(pw+"äöüß"+salt)                    
+          h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(pw)+"äöüß"+salt)                    
           attr = {:name => params[:author][:name],:password => h_pw,:salt => salt}
           @author = Author.new(attr)
           
