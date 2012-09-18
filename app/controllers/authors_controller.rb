@@ -34,10 +34,8 @@ class AuthorsController < ApplicationController
     
     @title = "Hinzufügen"
     @errors = ""
-    if params[:commit] then
-      if params[:commit] == "Abbrechen" then
-        redirect_to "/" and return
-      end
+    if params[:commit] and params[:commit] == "Abbrechen" then
+      redirect_to "/" and return
     end
     
     if session[:login] == "jap" then
@@ -46,15 +44,8 @@ class AuthorsController < ApplicationController
           @errors += "|Passwörter stimmen nicht überein| "
           #redirect_to :action=> "add" and return
         else
-         
-         
-         #FIXME Muss man mal auslagern :
-         
+
          pair = create_hash_pair params[:author][:password]
-         
-#         salt = Digest::SHA2.hexdigest(Time.now.to_s)
-#         pw = Digest::SHA2.hexdigest(params[:author][:password])
-#         h_pw = Digest::SHA2.hexdigest(pw+"<---Sekret--->"+salt)                    
          attr = {:name => params[:author][:name],:password => pair[0],:salt => pair[1]}
          @author = Author.new(attr)
           
@@ -93,11 +84,5 @@ class AuthorsController < ApplicationController
     test == pair[0]
   end
     
-
-#        @h_pw = hash(hash(params[:login][:password])+@secret+@author.salt)
-#        @h_pw_orig = @author.password
-#        @salt = @author.salt
-#        if @h_pw == @author.password then
-
   
 end
