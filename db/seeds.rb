@@ -60,16 +60,16 @@ titles.count.times do |i|
 end
 
 a_attr = {
-  :password => "f2677316cbe9ef4e26f917372aa2db9601836af1a0ce32f02d5387812441b239",
-  :salt => "16d2ffc2d58c8d817ae86459d419fe8c69e81bb3c62f2a0c7da8e8a5975307db",
+  :password => "2f7e4ba61e355c7146eef2f16ef7c5019cd57dea2540ed5086e2d3cfc54a0529",
+  :salt => "284db8a30f31b9f8d2672d5a3d5f4241de88d99edd5ca32e7ae73cfc529bbd5a",
   :name => "Moi"
 }
 Author.create(a_attr).save
 
-a_attr={
-  :password => "1ac0e11c946e5c291062eed4ec9209a3eac69d283eadc45368fff8d58b1de9d7",
-  :salt => "7c26d37993f1427a5b0483e94a1fefa8dd1aad8c583a75df4ffdf719190ce577",
-  :name => "Zeroalpha"  
-}
-Author.create(a_attr).save
+#a_attr={
+#  :password => "1ac0e11c946e5c291062eed4ec9209a3eac69d283eadc45368fff8d58b1de9d7",
+#  :salt => "7c26d37993f1427a5b0483e94a1fefa8dd1aad8c583a75df4ffdf719190ce577",
+#  :name => "Zeroalpha"  
+#}
+#Author.create(a_attr).save
 

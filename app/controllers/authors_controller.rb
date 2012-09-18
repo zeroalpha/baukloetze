@@ -1,5 +1,7 @@
 # encoding: utf-8
 class AuthorsController < ApplicationController
+  @secret = "<---Sekret--->"
+   require 'digest/sha2'
   def login
     require 'digest/sha2'
     @title = "Login"
@@ -7,11 +9,12 @@ class AuthorsController < ApplicationController
     if params[:commit] == "Login" and params[:login] then
       @author = Author.find_by_name params[:login][:name].downcase
       
-      if @author then
-        @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(params[:login][:password])+"äöüß"+@author.salt)
+      if @author then           #FIXME is there a good way to improve this ?
+        @h_pw = hash(hash(params[:login][:password])+"<---Sekret--->"+@author.salt)
+        
         @h_pw_orig = @author.password
         @salt = @author.salt
-        if @h_pw == @author.password then
+        if verify_against_hash_pair(params[:login][:password],[@author.password,@author.salt]) then
           session[:login] = "jap"
           session[:au_id] = @author.id
           redirect_to "/"
@@ -28,6 +31,7 @@ class AuthorsController < ApplicationController
   end
   
   def add
+    
     @title = "Hinzufügen"
     @errors = ""
     if params[:commit] then
@@ -42,30 +46,58 @@ class AuthorsController < ApplicationController
           @errors += "|Passwörter stimmen nicht überein| "
           #redirect_to :action=> "add" and return
         else
-          require 'digest/sha2'
          
-          salt = Digest::SHA2.hexdigest(Time.now.to_s)
-          pw = Digest::SHA2.hexdigest(params[:author][:password])
-          h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(pw)+"äöüß"+salt)                    
-          attr = {:name => params[:author][:name],:password => h_pw,:salt => salt}
-          @author = Author.new(attr)
+         
+         #FIXME Muss man mal auslagern :
+         
+         pair = create_hash_pair params[:author][:password]
+         
+#         salt = Digest::SHA2.hexdigest(Time.now.to_s)
+#         pw = Digest::SHA2.hexdigest(params[:author][:password])
+#         h_pw = Digest::SHA2.hexdigest(pw+"<---Sekret--->"+salt)                    
+         attr = {:name => params[:author][:name],:password => pair[0],:salt => pair[1]}
+         @author = Author.new(attr)
           
-          if @author.save then
-            redirect_to "/"
-          else
-            @errors += "|Name schon vorhanden|"
-          end
+         if @author.save then
+           redirect_to "/"
+         else
+           @errors += "|Name schon vorhanden|"
+         end
             
-        end                
-      end
-    else
-      redirect_to "/login" and return
-    end
+       end                
+     end
+   else
+     redirect_to "/login" and return
+   end
     
   end
   
   def del
     
   end
+  
+  private
+  
+  def hash(plaintext)
+    Digest::SHA2.hexdigest(plaintext)
+  end
+  
+  def create_hash_pair(clear_password)
+    pw = hash clear_password
+    salt = hash Time.now.to_s
+    [hash(pw + "<---Sekret--->" + salt),salt]
+  end
+  
+  def verify_against_hash_pair(plaintext_password,pair)
+    test = hash(hash(plaintext_password)+ "<---Sekret--->" + pair[1])
+    test == pair[0]
+  end
+    
+
+#        @h_pw = hash(hash(params[:login][:password])+@secret+@author.salt)
+#        @h_pw_orig = @author.password
+#        @salt = @author.salt
+#        if @h_pw == @author.password then
+
   
 end
