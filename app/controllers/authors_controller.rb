@@ -11,6 +11,7 @@ class AuthorsController < ApplicationController
         @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(params[:login][:password])+"äöüß"+@author.salt)
         @h_pw_orig = @author.password
         @salt = @author.salt
+        @pw_clear = params[:login][:password]
         if @h_pw == @author.password then
           session[:login] = "jap"
           session[:au_id] = @author.id
