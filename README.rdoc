@@ -7,7 +7,7 @@ Right now, the blog-software contains two controllers :
 Entries and Authors.
 
 The Entry Controller uses CodeRay 
-http://coderay.rubychan.de/
+http://coderay.rubychan.de
 to Display Code Snippets, which can be embedded in the content of an Entry by 
 using 
 
