@@ -11,7 +11,7 @@ gem "mini_magick"
 gem 'tinymce-rails'
 gem 'coderay'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'pg'
 
 
