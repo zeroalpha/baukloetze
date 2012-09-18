@@ -3,4 +3,17 @@
 After Working through the Book "Learning Rails by Example" and still feeling completely lost,
 I decided to dive into creating a Webproject by starting with this blog.
 
+Right now, the blog-software contains two controllers :
+Entries and Authors.
 
+The Entry Controller uses CodeRay 
+http://coderay.rubychan.de/
+to Display Code Snippets, which can be embedded in the content of an Entry by 
+using 
+
+${CODE_ruby}
+	#your ruby code
+	puts "Hello"
+${!CODE_ruby}
+
+the 'ruby' part of the tag can be changed to all languages supported by CodeRay.
