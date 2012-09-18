@@ -7,8 +7,9 @@ class AuthorsController < ApplicationController
     if params[:commit] == "Login" and params[:login] then
       @author = Author.find_by_name params[:login][:name].downcase
       
-      if @author then 
-        @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(params[:login][:password])+"äöüß"+@author.salt)
+      if @author then
+        pw = params[:login][:password]
+        @h_pw = Digest::SHA2.hexdigest(Digest::SHA2.hexdigest(pw)+"äöüß"+@author.salt)
         @h_pw_orig = @author.password
         @salt = @author.salt
         @pw_clear = params[:login][:password]
