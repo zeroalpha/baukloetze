@@ -3,5 +3,5 @@ class Entry < ActiveRecord::Base
   
   validates_presence_of :content,:title#,:autor_id
   validates_uniqueness_of :title
-  belongs_to :author
+#  belongs_to :author
 end
