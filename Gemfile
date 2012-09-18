@@ -11,8 +11,8 @@ gem "mini_magick"
 gem 'tinymce-rails'
 gem 'coderay'
 
-gem 'sqlite3'
-gem 'postgres'
+#gem 'sqlite3'
+gem 'pg'
 
 
 # Gems used only for assets and not required
