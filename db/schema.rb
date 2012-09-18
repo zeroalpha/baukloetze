@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20120905075147) do
 
-  create_table "authors", :force => true do |t|
+  create_table :authors, :force => true do |t|
     t.string   "name"
     t.string   "password"
     t.string   "salt"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20120905075147) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "entries", :force => true do |t|
+  create_table :entries, :force => true do |t|
     t.string   "title"
     t.text     "content"
     t.datetime "created_at", :null => false
