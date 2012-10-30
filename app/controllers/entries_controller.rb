@@ -7,7 +7,7 @@ class EntriesController < ApplicationController
     if session[:login] == "jap" then
       if params[:entry] then
         /\A\<p\>(.*)\<\/p\>\z/m =~ params[:entry][:content]
-        attr = {:title => params[:entry][:title], :content => parse_html_to_text($1),:author_id => session[:au_id]}#{:title => params[:entry][:title],:content=> params[:entry][:content]}
+        attr = {:title => params[:entry][:title], :content => $1,:author_id => session[:au_id]}#{:title => params[:entry][:title],:content=> params[:entry][:content]}
       else
         attr = {}
       end
@@ -89,7 +89,7 @@ class EntriesController < ApplicationController
       if @e_id and params[:magic] and params[:commit] == "Ändern" then
         @entry = Entry.find @e_id
         /\A\<p\>(.*)\<\/p\>\z/m =~ params[:content]
-        @entry.content = parse_html_to_text($1)
+        @entry.content = $1
         @entry.title = params[:title]
         @entry.save
         redirect_to :action => "read",:id => @e_id and return

@@ -25,11 +25,11 @@ module EntriesHelper
       code_html = CodeRay.scan(m[1],sym).div(:line_numbers => :inline)
       text.gsub!("${CODE_#{m[0]}}" + m[1] + "${!CODE_#{m[0]}}",code_html)
     end
-
-    text
+    return text
   end
+  
   def strip_p_tag(text)
-    /\<p\>(.*)\<\/p\>/ =~ text
+    /\<p\>(.*)\<\/p\>/m =~ text
     text = $1
   end  
 end
