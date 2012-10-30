@@ -67,6 +67,27 @@ class AuthorsController < ApplicationController
     
   end
   
+  def show
+    @title = "Anzeigen"
+    if session[:login] == "jap" then
+      if params[:author] then
+        @select = false
+        @a_id = params[:author][:id].to_i
+        @author = Author.find(@a_id)
+        
+      else
+        @select = true
+        @a_sel = Author.all.sort        
+      end
+    else
+      redirect_to "/" and return
+    end
+  end
+  
+  def change_pw
+    
+  end
+  
   private
   
   def hash(plaintext)

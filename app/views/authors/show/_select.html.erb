@@ -1,0 +1,6 @@
+<%# encoding: utf-8%>
+<br />
+<%=form_tag(:action=>'show') do |f|%>
+<%= collection_select(:author,:id,@a_sel,:id,:name)%>
+<%= submit_tag "Wählen"%>
+<%end%>

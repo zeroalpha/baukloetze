@@ -31,6 +31,10 @@ MyBlog::Application.routes.draw do
   get "authors/add"
   post "authors/add"
   
+  match "authors/show/:id/" => 'authors#show', :constraints => {:id=>/\d+/}
+  get "authors/show"
+  post "authors/show"
+  
   
 
   # The priority is based upon order of creation:
