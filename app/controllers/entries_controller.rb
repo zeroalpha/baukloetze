@@ -59,7 +59,7 @@ class EntriesController < ApplicationController
       elsif @e_id then
         @entry = Entry.find @e_id
         @title = @title + " : (#{@entry.id}) #{@entry.title}"
-        @text = "Wollen sie den Eintrag (#{@entry.id}) #{@entry.title} wirklich löschen ?"
+        @text = "Wollen sie den Eintrag (#{@entry.id}) <b>#{@entry.title}</b> wirklich löschen ?"
         @magic_id = @e_id
       end
     else

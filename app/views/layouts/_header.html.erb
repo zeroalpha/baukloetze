@@ -2,7 +2,7 @@
 	<table>
 		<tr>
 			<td>
-				<h1 color="black"><%=link_to "Bauklötze", "/", :class => "title_link"%></h1>
+				<h1><%=link_to "Bauklötze", "/", :class => "title_link"%></h1>
 			</td>
 			<td>
 				<font color="red" size="-1">by Christian Moniatis</font>
@@ -12,6 +12,9 @@
 			<%if session[:login]=="jap" then%>
 			<td>
 				<%=link_to Author.find(session[:au_id]).name, "/logout"%>
+			</td>
+			<td>
+				<%=link_to "Logout","/logout"%>
 			</td>
 			<td>
 				<%=link_to "Neuer Beitrag","entries/add",:color=>"black"%>
