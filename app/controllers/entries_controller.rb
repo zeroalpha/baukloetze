@@ -96,7 +96,7 @@ class EntriesController < ApplicationController
       elsif @e_id then
         @select = false
         @entry = Entry.find @e_id
-        @rows = @entry.content.scan(/\n/).size/1.7
+        @rows = @entry.content.scan(/\<br\>/).size/1.7
         @rows = @rows.to_i
       else
         @select = true

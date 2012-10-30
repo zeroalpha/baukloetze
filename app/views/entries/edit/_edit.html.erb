@@ -6,7 +6,7 @@
 	<tr><td><%=label_tag :titel%></td></tr>
 	<tr><td><%=text_field_tag :title,nil,:value => @entry.title%></td></tr>
 	<tr><td><%=label_tag :content%></td></tr>
-	<tr><td><%=text_area_tag :content,parse_text_to_html(@entry.content), :class => "tinymce",:rows => @rows,:columns=>90%></td></tr>
+	<tr><td><%=text_area_tag :content,@entry.content, :class => "tinymce",:rows => @rows,:columns=>90%></td></tr>
 			<%=tinymce%>
 	<tr><td><%=submit_tag "Ändern"%><%=submit_tag "Abbrechen"%></td>
 	</tr>
