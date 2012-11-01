@@ -1,8 +1,10 @@
 # encoding: utf-8
 class EntriesController < ApplicationController
-  helper_method :parse_html_to_text,:parse_text_to_html#Damit die 2 funktionen auch in den views zur verfügung stehen
+  #helper_method :parse_html_to_text,:parse_text_to_html#Damit die 2 funktionen auch in den views zur verfügung stehen
+  before_filter :set_controller_name
+  
   def add
-    @title = " | Hinzufügen"
+    @title = "Hinzufügen"
     
     if session[:login] == "jap" then
       if params[:entry] then
@@ -21,7 +23,7 @@ class EntriesController < ApplicationController
   end
 
   def read
-    @title = " | Lesen"
+    @title = "Lesen"
     @entries = []
     
     if params[:id] then
@@ -33,7 +35,7 @@ class EntriesController < ApplicationController
   end
 
   def rem
-    @title = " | Löschen"
+    @title = "Löschen"
     
     if session[:login]=="jap" then
   
@@ -68,7 +70,7 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @title = " | Ändern"
+    @title = "Ändern"
     
     if session[:login]=="jap" then
     
@@ -110,7 +112,10 @@ class EntriesController < ApplicationController
     
   end
   
-#  private
+  private
+  def set_controller_name
+    @controller = "Notizen"
+  end
   def parse_html_to_text(text)#HTML sonderzeichen durch lesbare ersetzen
     text.gsub!(/<br[\s\/]*>/,"\n")
     text.gsub!("&quot;","\"")
@@ -127,6 +132,7 @@ class EntriesController < ApplicationController
     text.gsub!("&nbsp;"," ")
     text
   end
+  
   def parse_text_to_html(text)#HTML sonderzeichen kodieren
     text.gsub!("ä","&auml;")
     text.gsub!("Ä","&Auml;")

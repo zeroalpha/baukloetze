@@ -11,7 +11,7 @@
 		<tr>
 			<%if session[:login]=="jap" then%>
 			<td>
-				<%=link_to Author.find(session[:au_id]).name, "/logout"%>
+				<%=link_to Author.find(session[:au_id]).name, "/authors/show/#{session[:au_id]}"%>
 			</td>
 			<td>
 				<%=link_to "Logout","/logout"%>

@@ -1,5 +1,6 @@
 # encoding: utf-8
 class AuthorsController < ApplicationController
+  before_filter :set_controller_name
   @secret = "<---Sekret--->"
    require 'digest/sha2'
   def login
@@ -90,6 +91,9 @@ class AuthorsController < ApplicationController
   
   private
   
+  def set_controller_name
+    @controller = "Autoren"
+  end
   def hash(plaintext)
     Digest::SHA2.hexdigest(plaintext)
   end
