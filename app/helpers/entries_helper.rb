@@ -15,15 +15,22 @@ module EntriesHelper
     
     mm.each do |m|
       
-      sym = case m[0]
-      when "ruby"
-        :ruby
-      when "erb"
-        :erb
-      end        
-      
-      code_html = CodeRay.scan(m[1],sym).div(:line_numbers => :inline)
+      sym = m[0].to_sym
+      #sym = case m[0]
+      #when "ruby"
+      #  :ruby
+      #when "erb"
+      #  :erb
+      #end        
+      logger.debug 'Full : ' + text
+      logger.debug 'Before : ' + m[1]
+      tt = parse_html_to_text(m[1])
+      logger.debug 'After : ' + tt
+      code_html = CodeRay.scan(tt,sym).div(:line_numbers => :inline)
+      logger.debug 'CR : ' + code_html
       text.gsub!("${CODE_#{m[0]}}" + m[1] + "${!CODE_#{m[0]}}",code_html)
+      logger.debug 'pattern = ' + "${CODE_#{m[0]}}" + m[1] + "${!CODE_#{m[0]}}"
+      logger.debug 'Final : ' + text
     end
     return text
   end
@@ -31,5 +38,27 @@ module EntriesHelper
   def strip_p_tag(text)
     /\<p\>(.*)\<\/p\>/m =~ text
     text = $1
+    text
   end  
+  def parse_html_to_text(text_in)#HTML sonderzeichen durch lesbare ersetzen
+    text = text_in.dup
+    text.gsub!(/<br[\s\/]*>/,"\n")
+    text.gsub!("&quot;","\"")
+    text.gsub!("&x27;","\'")
+    text.gsub!("&auml;","ä")
+    text.gsub!("&Auml;","Ä")
+    text.gsub!("&ouml;","ö")
+    text.gsub!("&Ouml;","Ö")
+    text.gsub!("&uuml;","ü")
+    text.gsub!("&Uuml;","Ü")
+    text.gsub!("&szlig;","ß")
+    text.gsub!("&lt;","<")
+    text.gsub!("&gt;",">")
+    text.gsub!("&nbsp;"," ")
+    
+    text.gsub!("<p>","")
+    text.gsub!("</p>","\n")
+    
+    text
+  end
 end

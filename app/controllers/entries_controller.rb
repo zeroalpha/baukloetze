@@ -27,8 +27,12 @@ class EntriesController < ApplicationController
     @entries = []
     
     if params[:id] then
-
-      @entry = Entry.find params[:id]
+      if Entry.exists? params[:id] then
+        @entry = Entry.find params[:id]
+      else
+        @entries = Entry.last(5).reverse
+      end
+      
     else
       @entries = Entry.last(5).reverse
     end
