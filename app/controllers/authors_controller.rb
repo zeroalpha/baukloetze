@@ -71,22 +71,41 @@ class AuthorsController < ApplicationController
   def show
     @title = "Anzeigen"
     if session[:login] == "jap" then
-      if params[:author] then
+      if params[:id] then
+        @select = false
+        @a_id = params[:id].to_i
+        if Author.exists?(@a_id) then
+          @author = Author.find(@a_id)  
+        else
+          redirect_to "/authors/show" and return
+        end
+        
+        @a_entries = Entry.where("author_id = ?",@a_id)
+      elsif params[:author] then
         @select = false
         @a_id = params[:author][:id].to_i
-        @author = Author.find(@a_id)
-        
+        if Author.exists?(@a_id) then     #FIXME is this useless paranoia ?
+          @author = Author.find(@a_id)
+        else
+          redirect_to "/authors/show" and return
+        end
+        @a_entries = Entry.where("author_id = ?",@a_id)
       else
         @select = true
-        @a_sel = Author.all.sort        
+        @a_sel = Author.all.sort      
       end
     else
-      redirect_to "/" and return
+      redirect_to "/login" and return
     end
   end
   
   def change_pw
-    
+    @titel  = "Passwort Ändern"
+    if session[:au_id].to_i == params[:id].to_i then
+      
+    else
+      redirect_to "/authors/show" and return
+    end
   end
   
   private

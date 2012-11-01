@@ -1,3 +1,32 @@
-Name = <%=@author.name%>
 
-<%=link_to "Passwort aendern","authors#change_pw"%>
+<h3><%=@author.name%></h3>
+<br />
+<% if session[:au_id] == @a_id then %>
+<%=link_to "Passwort aendern","/authors/change_pw/#{@a_id}"%>
+<% end%>
+<p>
+	<ul>
+		<%@a_entries.each do |entry|%>
+		<li>
+			<strong><%=link_to entry.title,"entry/read/#{entry.id}",:class => "title_link"%></strong>
+			<p>
+			<%=raw entry.preview%>
+			</p>
+			<%end%>
+		</li>		
+	</ul>
+	<!--
+	<strong>Beiträge : </strong>
+	<table border="1" bordercolor=#EEE>
+		<%@a_entries.each do |entry|%>
+		<tr>
+			<td>
+				<strong><%=link_to entry.title,"entry/read/#{entry.id}",:class => "title_link"%></strong>
+				<br>
+				<%=raw entry.preview%>
+			</td>				
+		</tr>
+		<%end%>
+	</table>
+	-->
+</p>

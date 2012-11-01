@@ -1,4 +1,5 @@
 <%# encoding: utf-8%>
+<strong>Wählen sie einen Autor</strong>
 <br />
 <%=form_tag(:action=>'show') do |f|%>
 <%= collection_select(:author,:id,@a_sel,:id,:name)%>
