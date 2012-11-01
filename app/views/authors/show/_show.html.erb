@@ -5,28 +5,33 @@
 <%=link_to "Passwort aendern","/authors/change_pw/#{@a_id}"%>
 <% end%>
 <p>
+	<!--
 	<ul>
 		<%@a_entries.each do |entry|%>
 		<li>
-			<strong><%=link_to entry.title,"entry/read/#{entry.id}",:class => "title_link"%></strong>
+			<strong><%=link_to entry.title,"entry/read/#{entry.id}",:class => "title_link"%></strong><%=raw "&nbsp"*4%>a
 			<p>
 			<%=raw entry.preview%>
 			</p>
 			<%end%>
 		</li>		
 	</ul>
-	<!--
+	-->
+	
 	<strong>Beiträge : </strong>
-	<table border="1" bordercolor=#EEE>
+	<table>
 		<%@a_entries.each do |entry|%>
 		<tr>
 			<td>
 				<strong><%=link_to entry.title,"entry/read/#{entry.id}",:class => "title_link"%></strong>
 				<br>
-				<%=raw entry.preview%>
-			</td>				
+				
+			</td>	
+			<td>
+				<%=print_old_date entry.created_at%>
+			</td>			
 		</tr>
 		<%end%>
 	</table>
-	-->
+	
 </p>

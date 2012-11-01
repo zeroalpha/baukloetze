@@ -89,7 +89,7 @@ class AuthorsController < ApplicationController
         else
           redirect_to "/authors/show" and return
         end
-        @a_entries = Entry.where("author_id = ?",@a_id)
+        @a_entries = Entry.where("author_id = ?",@a_id).reverse
       else
         @select = true
         @a_sel = Author.all.sort      

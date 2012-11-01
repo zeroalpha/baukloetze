@@ -1,11 +1,6 @@
 <h1><%= entry.title%></h1>
-<h6>by: <%= Author.find(entry.author_id).name%><br />
-<%t = entry.created_at.getlocal%>
-<%=sprintf("%02d.%02d.%d",t.day,t.month,t.year)%>
-</h6>
 
 <%if session[:login] == "jap" then%>
-	<br />
 	Beitrag : 
 	<%=link_to "Bearbeiten","/entries/edit/#{entry.id}"%>
 	<%=link_to "Löschen","/entries/rem/#{entry.id}"%>
@@ -14,4 +9,6 @@
 	<%=raw parse_text_with_code(entry.content)%>
 </p>
 
+<hr align="bottom">
+<font align="top" size="2" color=#000>by: <%= Author.find(entry.author_id).name%> @ <%t = entry.created_at.getlocal%><%=sprintf("%02d.%02d.%d",t.day,t.month,t.year)%></font>
 
