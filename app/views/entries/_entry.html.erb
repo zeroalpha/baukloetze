@@ -11,7 +11,7 @@
 	<%=link_to "Löschen","/entries/rem/#{entry.id}"%>
 <%end%>
 <p>
-	<%=raw parse_text_with_code(entry.content)%>
+	<%=raw entry.content%>
 </p>
 
 

@@ -1,1 +1,36 @@
-<%=form_tag :action=>'change_pw',:method=>'post'%>
+<table>
+<%=form_tag :action=>'change_pw',:method=>'post' do |f|%>
+<tr>
+	<td>
+		<%= label_tag "Altes Passwort : "%>
+	</td>
+	<td>
+		<%=password_field :author,:password_old%>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%=label_tag "Passwort : "%>
+	</td>
+	<td>
+		<%=password_field :author,:password%>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%=label_tag "Passwort wiederholen : "%>
+	</td>
+	<td>
+		<%=password_field :author,:password_confirmation%>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%=submit_tag "Ändern"%>
+	</td>
+	<td>
+		<%=submit_tag "Abbrechen"%>
+	</td>
+</tr>
+<%end%>
+</table>

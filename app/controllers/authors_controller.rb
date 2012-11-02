@@ -2,7 +2,7 @@
 class AuthorsController < ApplicationController
   before_filter :set_controller_name
   @secret = "<---Sekret--->"
-   require 'digest/sha2'
+  require 'digest/sha2'
   def login
     require 'digest/sha2'
     @title = "Login"
@@ -79,7 +79,6 @@ class AuthorsController < ApplicationController
         else
           redirect_to "/authors/show" and return
         end
-        
         @a_entries = Entry.where("author_id = ?",@a_id)
       elsif params[:author] then
         @select = false
@@ -100,9 +99,21 @@ class AuthorsController < ApplicationController
   end
   
   def change_pw
-    @titel  = "Passwort Ändern"
+    @title  = "Passwort andern"
     if session[:au_id].to_i == params[:id].to_i then
-      
+      if params[:commit] and params[:commit]=="Abbrechen" then
+        redirect_to "/authors/show/#{params[:id]}" and return
+      elsif params[:password_old] and params[:password] and params[:password_confirmation] then
+        @author = Author.find params[:au_id].to_i
+        if verify_against_hash_pair(params[:password_old],[@author.password,@author.salt]) then
+          if params[:password] and params[:password_confirmation] and params[:password]==params[:password_confirmation] then
+            pair = create_hash_pair(params[:password])
+            @author.password = pair[0]
+            @author.salt = pair[1]
+            @author.save
+          end
+        end
+      end
     else
       redirect_to "/authors/show" and return
     end
