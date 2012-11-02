@@ -2,7 +2,7 @@
 <h3><%=@author.name%></h3>
 <br />
 <% if session[:au_id] == @a_id then %>
-<%=link_to "Passwort aendern","/authors/change_pw/#{@a_id}"%>
+<%=link_to "Passwort ändern","/authors/change_pw/#{@a_id}"%>
 <% end%>
 <p>
 	<!--
