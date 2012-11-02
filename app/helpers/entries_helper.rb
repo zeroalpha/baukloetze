@@ -58,6 +58,10 @@ module EntriesHelper
     
     text.gsub!("<p>","")
     text.gsub!("</p>","\n")
+     
+    while text[0] == "\n" do
+      text.slice!(0,1)
+    end    
     
     text
   end
